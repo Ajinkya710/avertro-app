@@ -16,7 +16,7 @@ const Tabs = () => {
           <button
             key={index}
             style={{ color: "var(--primary-text-color)", backgroundColor: activeTab === index ? "#FFFFFF" : "#D7D7D7"}}
-            className="rounded-t-lg py-3 px-8 font-bold"
+            className="rounded-t-lg py-3 px-8 font-extrabold"
             // onClick={() => setActiveTab(index)}
           >
             {title}
@@ -24,7 +24,7 @@ const Tabs = () => {
         ))}
       </div>
       <div
-        className="border rounded-lg rounded-tl-none"
+        className="rounded-lg rounded-tl-none"
         style={{ backgroundColor: "#FFFFFF" }}
       >
         {tabContents.map((content, index) => (

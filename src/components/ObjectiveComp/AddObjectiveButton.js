@@ -6,7 +6,7 @@ const AddObjectiveButton = ({ disabled, onClick }) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`text-white px-5 py-2 m-5 rounded ${
+      className={`text-white text-sm px-5 py-2 rounded ${
         disabled ? "opacity-50 cursor-not-allowed" : ""
       }`}
       style={{ backgroundColor: "#25397D" }}

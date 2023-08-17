@@ -12,7 +12,7 @@ const TrackObjectives = () => {
   };
 
   return (
-    <div>
+    <div className='p-5'>
       {objectives.map(objective => (
         <ObjectiveForm
           key={objective.id}

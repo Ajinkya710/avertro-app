@@ -3,7 +3,7 @@ import Tabs from "./Tabs";
 
 const Page = () => {
   return (
-    <div className="sm:w-[85%] mx-auto">
+    <div className="sm:w-[85%] mx-auto mb-10">
       <h3
         className="font-normal my-8"
         style={{ color: "var(--primary-text-color)" }}
