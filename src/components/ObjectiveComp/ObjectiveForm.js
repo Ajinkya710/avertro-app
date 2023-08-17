@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ObjectiveForm = ({ objective }) => {
+const ObjectiveForm = ({ objective, onDelete, onUpdate }) => {
   console.log(objective);
   const { id, name, measures, startDate, endDate } = objective;
 
@@ -10,6 +10,15 @@ const ObjectiveForm = ({ objective }) => {
     setstartDateSelect(event.target.value);
     setEndDateSelect("");
   };
+
+  const handleDelete = () => {
+    onDelete(id);
+  };
+
+  const handleUpdate = () => {
+    onUpdate(id);
+  };
+
 
   return (
     <div
@@ -31,11 +40,13 @@ const ObjectiveForm = ({ objective }) => {
               type="text"
               placeholder="Objective Name"
               className="border p-2 mb-2 rounded text-sm"
+              value={name}
+              onChange={(e) => onUpdate(id, 'name', e.target.value)}
             />
           </div>
         </div>
         <div className="md:col-span-1">
-          <div className="grid grid-cols-2 gap-10">
+          <div className="grid grid-cols-2 gap-12">
             <div className="flex flex-col col-span-1 space-y-2">
               <label
                 htmlFor=""
@@ -76,12 +87,14 @@ const ObjectiveForm = ({ objective }) => {
         <button
           className="px-5 py-2 rounded text-sm"
           style={{ color: "#E03345", border: "1px solid #E03345" }}
+          onClick={handleDelete}
         >
           Delete
         </button>
         <button
           className=" text-white px-5 py-2 rounded text-sm"
           style={{ backgroundColor: "#25397D" }}
+          onClick={handleUpdate} 
         >
           Update
         </button>
