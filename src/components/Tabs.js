@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import ObjectiveTracker from "./ObjectiveComp/ObjectiveTracker";
 import ObjectiveForm from "./ObjectiveComp/ObjectiveForm";
+import TrackObjectives from "./ObjectiveComp/TrackObjectives";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -28,7 +29,7 @@ const Tabs = () => {
       >
         {tabContents.map((content, index) => (
           <div key={index} className={`${activeTab !== index && "hidden"}`}>
-              <ObjectiveForm/>
+              <TrackObjectives/>
           </div>
         ))}
       </div>

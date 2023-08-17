@@ -2,7 +2,7 @@ import React from "react";
 
 const ObjectiveForm = () => {
   return (
-    <div className="m-5 rounded-lg border p-5" style={{borderColor:'#C4C4C4'}}>
+    <div className="m-5 mb-0 rounded-lg border p-5" style={{borderColor:'#C4C4C4'}}>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20 gap-y-5">
         <div className="col-span-2 md:col-span-1">
           <div className="flex flex-col space-y-2">
