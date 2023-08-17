@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
-const ObjectiveForm = () => {
+const ObjectiveForm = ({ objective }) => {
+  console.log(objective);
+  const { id, name, measures, startDate, endDate } = objective;
+
+  const [startDateSelect, setstartDateSelect] = useState("");
+  const [endDateSelect, setEndDateSelect] = useState("");
+  const handleStartDateChange = (event) => {
+    setstartDateSelect(event.target.value);
+    setEndDateSelect("");
+  };
+
   return (
-    <div className="rounded-lg border p-5 mb-5" style={{borderColor:'#C4C4C4'}}>
+    <div
+      className="rounded-lg border p-5 mb-5"
+      style={{ borderColor: "#C4C4C4" }}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20 gap-y-5 ">
         <div className="col-span-2 md:col-span-1">
           <div className="flex flex-col space-y-2">
@@ -11,7 +24,7 @@ const ObjectiveForm = () => {
               className="font-extrabold"
               style={{ color: "var(--primary-text-color)" }}
             >
-              Objective
+              {`Objective ${id}`}
             </label>
             <input
               id="objective"
@@ -35,6 +48,8 @@ const ObjectiveForm = () => {
                 type="date"
                 placeholder="Start Date"
                 className="border p-2 rounded text-sm"
+                value={startDateSelect}
+                onChange={handleStartDateChange}
               />
             </div>
             <div className="flex flex-col col-span-1 space-y-2">
@@ -48,7 +63,10 @@ const ObjectiveForm = () => {
               <input
                 type="date"
                 placeholder="End Date"
-                className="border p-2 rounded text-sm"
+                className=" border p-2 text-sm "
+                value={endDateSelect}
+                onChange={(e) => setEndDateSelect(e.target.value)}
+                min={startDateSelect}
               />
             </div>
           </div>

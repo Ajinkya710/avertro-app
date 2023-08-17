@@ -20,7 +20,7 @@ const TrackObjectives = () => {
         />
       ))}
       <AddObjectiveButton
-        disabled={objectives.length >= 3}
+        disabled={objectives.length === 3}
         onClick={handleAddObjective}
       />
     </div>
