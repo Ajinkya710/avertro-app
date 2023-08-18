@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ObjectiveForm = ({ objective, onDelete, onUpdate }) => {
-  console.log(objective);
   const { id, name, measures, startDate, endDate } = objective;
 
   const [startDateSelect, setstartDateSelect] = useState("");
   const [endDateSelect, setEndDateSelect] = useState("");
-  const handleStartDateChange = (event) => {
-    setstartDateSelect(event.target.value);
+
+  const handleStartDateChange = (date) => {
+    setstartDateSelect(date);
     setEndDateSelect("");
   };
 
@@ -19,18 +21,17 @@ const ObjectiveForm = ({ objective, onDelete, onUpdate }) => {
     onUpdate(id);
   };
 
-
   return (
     <div
-      className="rounded-lg border p-5 mb-5"
+      className="rounded-lg border p-7 mb-5"
       style={{ borderColor: "#C4C4C4" }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20 gap-y-5 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 gap-y-5 ">
         <div className="col-span-2 md:col-span-1">
           <div className="flex flex-col space-y-2">
             <label
               htmlFor="objective"
-              className="font-extrabold"
+              className="font-bold sm:text-lg text-base "
               style={{ color: "var(--primary-text-color)" }}
             >
               {`Objective ${id}`}
@@ -39,65 +40,77 @@ const ObjectiveForm = ({ objective, onDelete, onUpdate }) => {
               id="objective"
               type="text"
               placeholder="Objective Name"
-              className="border p-2 mb-2 rounded text-sm"
+              className="border p-2 mb-2 rounded-md text-sm"
               value={name}
-              onChange={(e) => onUpdate(id, 'name', e.target.value)}
+              onChange={(e) => onUpdate(id, "name", e.target.value)}
             />
           </div>
         </div>
         <div className="md:col-span-1">
-          <div className="grid grid-cols-2 gap-12">
+          <div className="grid grid-cols-2 gap-6">
             <div className="flex flex-col col-span-1 space-y-2">
               <label
                 htmlFor=""
-                className="font-extrabold"
+                className="font-bold sm:text-lg text-base"
                 style={{ color: "var(--primary-text-color)" }}
               >
                 Start Date
               </label>
-              <input
-                type="date"
-                placeholder="Start Date"
-                className="border p-2 rounded text-sm"
-                value={startDateSelect}
+              <DatePicker
+                showIcon
+                className="border rounded-md w-full text-sm"
+                dateFormat="dd/MM/yyyy"
+                placeholderText="dd/mm/yyyy"
+                selected={startDateSelect}
                 onChange={handleStartDateChange}
               />
             </div>
             <div className="flex flex-col col-span-1 space-y-2">
               <label
                 htmlFor=""
-                className="font-extrabold "
+                className="font-bold sm:text-lg text-base"
                 style={{ color: "var(--primary-text-color)" }}
               >
                 End Date
               </label>
-              <input
-                type="date"
-                placeholder="End Date"
-                className=" border p-2 text-sm "
-                value={endDateSelect}
-                onChange={(e) => setEndDateSelect(e.target.value)}
-                min={startDateSelect}
+              <DatePicker
+                showIcon
+                className="border rounded-md w-full text-sm"
+                dateFormat="dd/MM/yyyy"
+                placeholderText="dd/mm/yyyy"
+                selected={endDateSelect}
+                onChange={(date) => setEndDateSelect(date)}
+                minDate={startDateSelect}
               />
             </div>
           </div>
         </div>
       </div>
-      <div className="flex mt-5 space-x-10 justify-end">
-        <button
-          className="px-5 py-2 rounded text-sm"
-          style={{ color: "#E03345", border: "1px solid #E03345" }}
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
-        <button
-          className=" text-white px-5 py-2 rounded text-sm"
-          style={{ backgroundColor: "#25397D" }}
-          onClick={handleUpdate} 
-        >
-          Update
-        </button>
+      <div className="sm:flex grid grid-cols-1 mt-5 sm:space-x-6 sm:space-y-0 space-y-3 justify-end ">
+        <div className="flex flex-col col-span-1">
+          <button
+            className="px-5 py-2 rounded-md text-sm "
+            style={{
+              color: "var(--danger-button-color)",
+              border: "1px solid var(--danger-button-color)",
+            }}
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        </div>
+        <div className="flex flex-col col-span-1">
+          <button
+            className=" text-white px-5 py-2 rounded-md text-sm"
+            style={{
+              backgroundColor: "var(--update-button-color)",
+              border: "1px solid var(--update-button-color)",
+            }}
+            onClick={handleUpdate}
+          >
+            Update
+          </button>
+        </div>
       </div>
     </div>
   );

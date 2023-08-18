@@ -6,14 +6,14 @@ const AddObjectiveButton = ({ disabled, onClick }) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`text-white text-sm px-5 py-2 rounded ${
+      className={`text-white text-sm px-5 py-2 rounded-md ${
         disabled ? "opacity-50 cursor-not-allowed" : ""
       }`}
-      style={{ backgroundColor: "#25397D" }}
+      style={{ backgroundColor: "var(--update-button-color)" }}
     >
       <div className="flex items-center">
         <svg
-          fill="#ffffff"
+          fill="var(--primary-white-color)"
           width="28px"
           height="28px"
           viewBox="-2.04 -2.04 24.48 24.48"

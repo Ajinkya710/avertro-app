@@ -1,6 +1,25 @@
 :root {
     --primary-text-color: #273B7E;
+    --primary-white-color: #FFFFFF;
+    --gray-color: #D7D7D7;
+    --danger-button-color: #E03345;
+    --update-button-color: #25397D
   }
+  
+.react-datepicker__view-calendar-icon input {
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem !important;
+}
+
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+    position: absolute !important;
+    padding: 0 !important; /* Remove the padding */
+    margin: 0.5rem 0 0 0.5rem !important; /* Add margin to create space around the icon */
+}
+.react-datepicker__calendar-icon {
+    color: #273B7E !important;
+    width: 1.5em !important;
+    height: 1.3em !important;
+}
 
 body {
     background: #F8F8F8;

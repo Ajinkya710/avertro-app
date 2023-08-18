@@ -3,16 +3,14 @@ import Tabs from "./Tabs";
 
 const Page = () => {
   return (
-    <div className="sm:w-[85%] mx-auto mb-10">
+    <div className="mt-28 sm:w-[85%] mx-auto mb-10 ">
       <h3
-        className="font-normal my-8"
-        style={{ color: "var(--primary-text-color)" }}
+        className="my-8 var(--primary-text-color)"
+        style={{ color: "var(--primary-text-color)", fontFamily:'Nunito' }}
       >
-        {" "}
-        <a href="">Set Security Strategy</a>
+        Set Security Strategy
       </h3>
-      {/* <hr style={{color:'#D7D7D7'}}/> */}
-      <div className="border-b" style={{ color: "#D7D7D7" }}></div>
+      <div className="border-b var(--gray-color)"></div>
       <Tabs />
     </div>
   );

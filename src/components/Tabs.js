@@ -16,9 +16,9 @@ const Tabs = () => {
             key={index}
             style={{
               color: "var(--primary-text-color)",
-              backgroundColor: activeTab === index ? "#FFFFFF" : "#D7D7D7",
+              backgroundColor: activeTab === index ? "var(--primary-white-color)" : "var(--gray-color)",
             }}
-            className="rounded-t-lg py-3 px-8 font-extrabold"
+            className="rounded-t-lg py-3 px-8 font-bold sm:text-lg text-base text-var(--primary-text-color)"
             // onClick={() => setActiveTab(index)}
           >
             {title}
@@ -27,7 +27,7 @@ const Tabs = () => {
       </div>
       <div
         className="rounded-lg rounded-tl-none"
-        style={{ backgroundColor: "#FFFFFF" }}
+        style={{ backgroundColor: "var(--primary-white-color)" }}
       >
         <div>
           <TrackObjectives />

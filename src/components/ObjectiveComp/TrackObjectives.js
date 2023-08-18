@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddObjectiveButton from "./AddObjectiveButton";
 import ObjectiveForm from "./ObjectiveForm";
 
@@ -18,10 +18,21 @@ const TrackObjectives = () => {
     );
     setObjectives(updatedObjectivesWithAdjustedIDs);
   };
+
+  useEffect(() => {
+    const defaultObjective = {
+      id: 1,
+      name: "",      
+      startDate: "", 
+      endDate: ""    
+    };
+
+    setObjectives([defaultObjective]);
+  }, []);
   
   return (
     <div className="p-5">
-      {objectives.map((objective, index) => (
+      {objectives.map((objective) => (
         <ObjectiveForm
           key={objective.id}
         //   id={index + 1}
