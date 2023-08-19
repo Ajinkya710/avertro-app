@@ -1,8 +1,16 @@
 import React from "react";
 
-const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
+const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange, measuresNameError }) => {
   return (
     <div className="flex space-x-2 mb-2">
+      {measuresNameError && (
+        <span
+          className="text-sm"
+          style={{ color: "var(--danger-button-color)" }}
+        >
+          Please enter measure name
+        </span>
+      )}
       <input
         type="text"
         value={measure}
@@ -10,9 +18,7 @@ const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
         className="border p-2 rounded-md w-full text-sm"
       />
       {index >= 0 && (
-        <button
-          onClick={() => onDeleteMeasure(index)}
-        >
+        <button onClick={() => onDeleteMeasure(index)}>
           <svg
             className="h-5 w-5"
             viewBox="0 0 24 24"

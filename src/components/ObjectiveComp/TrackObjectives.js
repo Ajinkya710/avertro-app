@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AddObjectiveButton from "./AddObjectiveButton";
 import ObjectiveForm from "./ObjectiveForm";
-import { validateObjectiveData } from "../ValidateComp/CheckValidation";
 
 const TrackObjectives = () => {
   const [objectives, setObjectives] = useState([]);
