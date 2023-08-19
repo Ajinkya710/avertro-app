@@ -1,6 +1,6 @@
 import React from "react";
 
-const Measure = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
+const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
   return (
     <div className="flex space-x-2 mb-2">
       <input
@@ -41,4 +41,4 @@ const Measure = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
   );
 };
 
-export default Measure;
+export default MeasureForm;

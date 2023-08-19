@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
 import AddObjectiveButton from "./AddObjectiveButton";
 import ObjectiveForm from "./ObjectiveForm";
+import { validateObjectiveData } from "../ValidateComp/CheckValidation";
 
 const TrackObjectives = () => {
   const [objectives, setObjectives] = useState([]);
 
   const handleAddObjective = () => {
     if (objectives.length < 3) {
-      setObjectives([...objectives,{ id: objectives.length + 1, name: "", measures: [''], startDate: "", endDate: "" }]);
+      setObjectives([
+        ...objectives,
+        {
+          id: objectives.length + 1,
+          name: "",
+          measures: [""],
+          startDate: "",
+          endDate: "",
+        },
+      ]);
     }
   };
 
   const handleDeleteObjective = (id) => {
     const updatedObjectives = objectives.filter((obj) => obj.id !== id);
     const updatedObjectivesWithAdjustedIDs = updatedObjectives.map(
-      (obj, index) => ({...obj, id: index + 1})
+      (obj, index) => ({ ...obj, id: index + 1 })
     );
     setObjectives(updatedObjectivesWithAdjustedIDs);
   };
 
   const handleUpdateObjective = (id, field, value) => {
-    const updatedObjectives = objectives.map(obj => {
+    const updatedObjectives = objectives.map((obj) => {
       if (obj.id === id) {
-        if (field === 'measures') {
+        if (field === "measures") {
           return { ...obj, measures: value };
         } else {
           return { ...obj, [field]: value };
@@ -37,23 +47,23 @@ const TrackObjectives = () => {
     const defaultObjective = {
       id: 1,
       name: "",
-      measures: [''],      
-      startDate: "", 
-      endDate: ""    
+      measures: [""],
+      startDate: "",
+      endDate: "",
     };
 
     setObjectives([defaultObjective]);
   }, []);
-  
+
   return (
     <div className="p-5">
       {objectives.map((objective) => (
         <ObjectiveForm
           key={objective.id}
-        //   id={index + 1}
+          //   id={index + 1}
           objective={objective}
           onDelete={handleDeleteObjective}
-          onUpdate={handleUpdateObjective}
+          onChange={handleUpdateObjective}
         />
       ))}
       <AddObjectiveButton
