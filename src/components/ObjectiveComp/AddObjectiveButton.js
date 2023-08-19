@@ -11,14 +11,12 @@ const AddObjectiveButton = ({ disabled, onClick }) => {
       }`}
       style={{ backgroundColor: "var(--update-button-color)" }}
     >
-      <div className="flex items-center">
+      <div className="flex items-center gap-1">
         <svg
           fill="var(--primary-white-color)"
-          width="28px"
-          height="28px"
           viewBox="-2.04 -2.04 24.48 24.48"
           xmlns="http://www.w3.org/2000/svg"
-          className="cf-icon-svg"
+          className="cf-icon-svg h-8 w-8"
           stroke="#000000"
           strokeWidth="0.00020400000000000003"
         >

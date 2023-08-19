@@ -7,7 +7,7 @@ const TrackObjectives = () => {
 
   const handleAddObjective = () => {
     if (objectives.length < 3) {
-      setObjectives([...objectives,{ id: objectives.length + 1, name: "", startDate: "", endDate: "" }]);
+      setObjectives([...objectives,{ id: objectives.length + 1, name: "", measures: [''], startDate: "", endDate: "" }]);
     }
   };
 
@@ -19,10 +19,25 @@ const TrackObjectives = () => {
     setObjectives(updatedObjectivesWithAdjustedIDs);
   };
 
+  const handleUpdateObjective = (id, field, value) => {
+    const updatedObjectives = objectives.map(obj => {
+      if (obj.id === id) {
+        if (field === 'measures') {
+          return { ...obj, measures: value };
+        } else {
+          return { ...obj, [field]: value };
+        }
+      }
+      return obj;
+    });
+    setObjectives(updatedObjectives);
+  };
+
   useEffect(() => {
     const defaultObjective = {
       id: 1,
-      name: "",      
+      name: "",
+      measures: [''],      
       startDate: "", 
       endDate: ""    
     };
@@ -38,6 +53,7 @@ const TrackObjectives = () => {
         //   id={index + 1}
           objective={objective}
           onDelete={handleDeleteObjective}
+          onUpdate={handleUpdateObjective}
         />
       ))}
       <AddObjectiveButton
