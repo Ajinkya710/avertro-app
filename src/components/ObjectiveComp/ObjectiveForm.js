@@ -94,7 +94,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
       {successNotification && (
         <div
           id="toast-success"
-          className="flex items-center p-1 rounded-lg text-white dark:bg-green-800 mb-2"
+          className="successAlert flex items-center p-1 rounded-lg text-white dark:bg-green-800 mb-2"
           style={{ border: "1px solid green" }}
           role="alert"
         >

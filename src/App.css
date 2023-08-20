@@ -24,3 +24,17 @@
 body {
     background: #F8F8F8;
 }
+
+@keyframes fadeOut {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the animation to the root element */
+  .successAlert {
+    animation: fadeOut  0.5s ease-in-out;
+  }
