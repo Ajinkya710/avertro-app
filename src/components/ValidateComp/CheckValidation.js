@@ -6,7 +6,7 @@ export const validateObjectiveData = (field, value) => {
     case "endDate":
       return value !== null && value !== undefined && value !== "";
     case "measures":
-      return value.some((val) => val !== null && val !== undefined && val !== "");
+        return value.some(measure => measure.trim() !== "");
     default:
       return true; 
   }

@@ -20,12 +20,18 @@ const TrackObjectives = () => {
     }
   };
 
+  // Adjusting the ID's to be consecutive and then deleting last object
   const handleDeleteObjective = (id) => {
     const updatedObjectives = objectives.filter((obj) => obj.id !== id);
-    const updatedObjectivesWithAdjustedIDs = updatedObjectives.map(
-      (obj, index) => ({ ...obj, id: index + 1 })
-    );
-    setObjectives(updatedObjectivesWithAdjustedIDs);
+
+    updatedObjectives.forEach((obj, index) => {
+      const updatedId = index + 1;
+      const objString = JSON.stringify({ ...obj, id: updatedId });
+      localStorage.setItem(`objective_${updatedId}`, objString);
+    });
+    localStorage.removeItem(`objective_${objectives.length}`);
+
+    setObjectives(updatedObjectives);
   };
 
   const handleUpdateObjective = (id, field, value) => {
@@ -43,15 +49,30 @@ const TrackObjectives = () => {
   };
 
   useEffect(() => {
-    const defaultObjective = {
-      id: 1,
-      name: "",
-      measures: [""],
-      startDate: "",
-      endDate: "",
-    };
+    const storedObjectives = [];
+    for (let id = 1; ; id++) {
+      const storedObjectiveString = localStorage.getItem(`objective_${id}`);
 
-    setObjectives([defaultObjective]);
+      if (!storedObjectiveString) {
+        break;
+      }
+      const storedObjective = JSON.parse(storedObjectiveString);
+      storedObjectives.push(storedObjective);
+    }
+    if (storedObjectives.length > 0) {
+      setObjectives(storedObjectives);
+    } else {
+      //Setting first blank objective by default
+      setObjectives([
+        {
+          id: 1,
+          name: "",
+          measures: [""],
+          startDate: "",
+          endDate: "",
+        },
+      ]);
+    }
   }, []);
 
   return (
@@ -59,7 +80,6 @@ const TrackObjectives = () => {
       {objectives.map((objective) => (
         <ObjectiveForm
           key={objective.id}
-          //   id={index + 1}
           objective={objective}
           onDelete={handleDeleteObjective}
           onChange={handleUpdateObjective}

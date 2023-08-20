@@ -1,16 +1,8 @@
 import React from "react";
 
-const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange, measuresNameError }) => {
+const MeasureForm = ({ index, measure, onDeleteMeasure, onMeasureChange }) => {
   return (
     <div className="flex space-x-2 mb-2">
-      {measuresNameError && (
-        <span
-          className="text-sm"
-          style={{ color: "var(--danger-button-color)" }}
-        >
-          Please enter measure name
-        </span>
-      )}
       <input
         type="text"
         value={measure}

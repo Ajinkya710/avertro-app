@@ -8,22 +8,25 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const ObjectiveForm = ({ objective, onDelete, onChange }) => {
-  console.log(objective);
   const { id, name, measures } = objective;
-  const [startDateSelected, setstartDateSelected] = useState("");
-  const [endDateSelected, setEndDateSelected] = useState("");
+  const [startDateSelected, setStartDateSelected] = useState(
+    objective.startDate ? new Date(objective.startDate) : null
+  );
+  const [endDateSelected, setEndDateSelected] = useState(
+    objective.endDate ? new Date(objective.endDate) : null
+  );
 
-  const [objectiveNameError, setObjectiveNameError] = useState(false);
+  const [objectiveNameError, setObjectiveNameError] = useState();
   const [startDateError, setStartDateError] = useState();
   const [endDateError, setEndDateError] = useState();
-  const [validateDate, setValidateDate] = useState(false);
-  const [measuresNameError, setMeasuresNameError] = useState(false);
+  const [validateDate, setValidateDate] = useState();
+  const [measuresNameError, setMeasuresNameError] = useState();
 
   const handleStartDateChange = (date) => {
     setStartDateError(false);
     setEndDateError();
     setValidateDate(false);
-    setstartDateSelected(date);
+    setStartDateSelected(date);
     setEndDateSelected("");
   };
 
@@ -32,13 +35,44 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   };
 
   const handleUpdate = () => {
-    setObjectiveNameError(!validateObjectiveData("name", name));
-    setStartDateError(!validateObjectiveData("startDate", startDateSelected));
-    setEndDateError(!validateObjectiveData("endDate", endDateSelected));
+    const isNameValid = validateObjectiveData("name", name);
+    setObjectiveNameError(!isNameValid);
+    const isStartDateValid = validateObjectiveData("startDate",startDateSelected);
+    setStartDateError(!isStartDateValid);
+    const isEndDateValid = validateObjectiveData("endDate", endDateSelected);
+    setEndDateError(!isEndDateValid);
     if (startDateError === false && endDateError === false) {
-      setValidateDate(!checkEndDate(startDateSelected, endDateSelected));
+      const isDateValid = checkEndDate(startDateSelected, endDateSelected);
+      setValidateDate(!isDateValid);
     }
-    setMeasuresNameError(!validateObjectiveData("measures", measures));
+    const isMeasuresValid = validateObjectiveData("measures", measures);
+    setMeasuresNameError(!isMeasuresValid);
+
+    console.log(objectiveNameError)
+    console.log(startDateError)
+    console.log(endDateError)
+    console.log(validateDate)
+    console.log(measuresNameError)
+    if (
+      objectiveNameError === false &&
+      startDateError === false &&
+      endDateError === false &&
+      validateDate === false &&
+      measuresNameError === false
+    ) {
+      console.log("validation passed");
+      const updatedObjective = {
+        id: objective.id,
+        name: name,
+        measures: measures,
+        startDate: startDateSelected,
+        endDate: endDateSelected,
+      };
+
+      const updatedObjectiveString = JSON.stringify(updatedObjective);
+      localStorage.setItem(`objective_${objective.id}`, updatedObjectiveString);
+      console.log(localStorage);
+    }
   };
 
   return (
@@ -129,7 +163,11 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
                   setValidateDate(false);
                   setEndDateSelected(date);
                 }}
-                minDate={startDateSelected ? new Date(startDateSelected.getTime() + 86400000) : undefined}
+                minDate={
+                  startDateSelected
+                    ? new Date(startDateSelected.getTime() + 86400000)
+                    : undefined
+                }
               />
               {endDateError && (
                 <span
@@ -155,6 +193,8 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
         id={id}
         measures={measures}
         onChange={onChange}
+        measureNameError={measuresNameError}
+        setMeasureNameError={setMeasuresNameError}
       />
       <div className="sm:flex grid grid-cols-1 mt-4 sm:space-x-6 sm:space-y-0 space-y-3 justify-end ">
         <div className="flex flex-col col-span-1">

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import AddMeasure from "./AddMeasure";
 import MeasureForm from "./MeasureForm";
 
-const TrackMeasures = ({ id, measures, onChange }) => {
+const TrackMeasures = ({ id, measures, onChange, measureNameError, setMeasureNameError }) => {
   const [measureError, setMeasureError] = useState(false);
-
   const handleAddMeasure = () => {
     setMeasureError(false);
     if (measures.length < 3) {
@@ -23,6 +22,7 @@ const TrackMeasures = ({ id, measures, onChange }) => {
 
   const handleMeasureChange = (index, value) => {
     setMeasureError(false);
+    setMeasureNameError(false);
     const updatedMeasures = [...measures];
     updatedMeasures[index] = value;
     onChange(id, "measures", updatedMeasures);
@@ -43,23 +43,14 @@ const TrackMeasures = ({ id, measures, onChange }) => {
           disabled={measures.length === 3}
         />
       </div>
-      {measureError ? (
+      {measureError || measureNameError === true ? (
         <span
           className="text-sm"
           style={{ color: "var(--danger-button-color)" }}
         >
           Atleast 1 key measure is required
         </span>
-      ) : 
-      // measureNameError ? (
-      //   <span
-      //     className="text-sm"
-      //     style={{ color: "var(--danger-button-color)" }}
-      //   >
-      //     Enter measure name.
-      //   </span>
-      // ) : 
-      null}
+      ) : null}
 
       <div className="lg:w-1/2 mt-3">
         {measures.map((measure, index) => (
@@ -70,6 +61,7 @@ const TrackMeasures = ({ id, measures, onChange }) => {
             onDeleteMeasure={handleDeleteMeasure}
             onMeasureChange={(value) => handleMeasureChange(index, value)}
             measureError={measureError}
+            measuresNameError={measureNameError}
           />
         ))}
       </div>
