@@ -6,6 +6,7 @@ import {
 } from "../Validate/CheckValidation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+// import { FaCalendarAlt } from 'react-icons/fa';
 
 const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const { id, name, measures } = objective;
@@ -82,7 +83,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
         setSuccessNotification(false);
       }, 3000);
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [successNotification]);
 
@@ -110,7 +111,9 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
             </svg>
             <span className="sr-only">Check icon</span>
           </div>
-          <div className="ml-3 text-sm font-normal">Item updated successfully.</div>
+          <div className="ml-3 text-sm font-normal">
+            Item updated successfully.
+          </div>
         </div>
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-16 space-y-5 md:space-y-0">
@@ -156,16 +159,38 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
               >
                 Start Date
               </label>
-              <DatePicker
-                showIcon
-                className={`border rounded-md w-full text-sm ${
-                  startDateError && "border-red-500"
-                }`}
-                dateFormat="dd/MM/yyyy"
-                placeholderText="dd/mm/yyyy"
-                selected={startDateSelected}
-                onChange={handleStartDateChange}
-              />
+              <div className="relative">
+                <div className="absolute mt-1.5 ml-2 z-10">
+                  <svg
+                    fill="#25397D"
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    enable-background="new 0 0 24 24"
+                    stroke="#25397D"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M2,19c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3v-8H2V19z M19,4h-2V3c0-0.6-0.4-1-1-1s-1,0.4-1,1v1H9V3c0-0.6-0.4-1-1-1S7,2.4,7,3v1H5C3.3,4,2,5.3,2,7v2h20V7C22,5.3,20.7,4,19,4z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <DatePicker
+                  className={`border p-2 pl-10 w-full 3xl:w-[120%] 4xl:w-[140%] rounded-md text-sm ${
+                    startDateError && "border-red-500"
+                  }`}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="dd/mm/yyyy"
+                  selected={startDateSelected}
+                  onChange={handleStartDateChange}
+                />
+              </div>
               {startDateError && (
                 <span
                   className="text-xs"
@@ -183,25 +208,47 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
               >
                 End Date
               </label>
-              <DatePicker
-                showIcon
-                className={`border rounded-md w-full text-sm ${
-                  (endDateError || validateDate) && "border-red-500"
-                }`}
-                dateFormat="dd/MM/yyyy"
-                placeholderText="dd/mm/yyyy"
-                selected={endDateSelected}
-                onChange={(date) => {
-                  setEndDateError(false);
-                  setValidateDate(false);
-                  setEndDateSelected(date);
-                }}
-                minDate={
-                  startDateSelected
-                    ? new Date(startDateSelected.getTime() + 86400000)
-                    : undefined
-                }
-              />
+              <div className="relative">
+                <div className="absolute mt-1.5 ml-2 z-10">
+                  <svg
+                    fill="#25397D"
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    enable-background="new 0 0 24 24"
+                    stroke="#25397D"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M2,19c0,1.7,1.3,3,3,3h14c1.7,0,3-1.3,3-3v-8H2V19z M19,4h-2V3c0-0.6-0.4-1-1-1s-1,0.4-1,1v1H9V3c0-0.6-0.4-1-1-1S7,2.4,7,3v1H5C3.3,4,2,5.3,2,7v2h20V7C22,5.3,20.7,4,19,4z"></path>
+                    </g>
+                  </svg>
+                </div>
+                <DatePicker
+                  className={`border p-2 pl-10 w-full 3xl:w-[120%] 4xl:w-[140%] rounded-md text-sm ${
+                    (endDateError || validateDate) && "border-red-500"
+                  }`}
+                  dateFormat="dd/MM/yyyy"
+                  placeholderText="dd/mm/yyyy"
+                  selected={endDateSelected}
+                  onChange={(date) => {
+                    setEndDateError(false);
+                    setValidateDate(false);
+                    setEndDateSelected(date);
+                  }}
+                  minDate={
+                    startDateSelected
+                      ? new Date(startDateSelected.getTime() + 86400000)
+                      : undefined
+                  }
+                />
+              </div>
               {endDateError && (
                 <span
                   className="text-xs"
