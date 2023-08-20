@@ -62,7 +62,6 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   };
 
   const updateStorage = () => {
-    console.log("validation passed");
     const updatedObjective = {
       id: objective.id,
       name: name,
@@ -73,12 +72,10 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
 
     const updatedObjectiveString = JSON.stringify(updatedObjective);
     localStorage.setItem(`objective_${objective.id}`, updatedObjectiveString);
-    console.log(localStorage);
     setSuccessNotification(true);
   };
 
   useEffect(() => {
-    console.log("useEffect called");
     if (validationSuccess) {
       updateStorage();
       setValidationSuccess(false);

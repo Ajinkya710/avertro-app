@@ -37,11 +37,9 @@ const TrackObjectives = () => {
     }
     const updateStorageObjectives = storedObjectives.filter((obj) => obj.id !== id);
     localStorage.removeItem(`objective_${id}`);
-    console.log(updateStorageObjectives)
     updateStorageObjectives.forEach((obj, index) => {
         const updatedId = index + 1;
         const objString = JSON.stringify({ ...obj, id: updatedId });
-        console.log(objString)
         localStorage.setItem(`objective_${updatedId}`, objString);
     });
     localStorage.removeItem(`objective_${objectives.length}`);
