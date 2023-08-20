@@ -45,7 +45,7 @@ const TrackMeasures = ({ id, measures, onChange, measureNameError, setMeasureNam
       </div>
       {measureError || measureNameError === true ? (
         <span
-          className="text-sm"
+          className="text-xs"
           style={{ color: "var(--danger-button-color)" }}
         >
           Atleast 1 key measure is required
