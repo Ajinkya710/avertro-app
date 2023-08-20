@@ -3,7 +3,7 @@ import TrackMeasures from "../Measure/TrackMeasures";
 import {
   validateObjectiveData,
   checkEndDate,
-} from "../ValidateComp/CheckValidation";
+} from "../Validate/CheckValidation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -82,7 +82,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
         setSuccessNotification(false);
       }, 3000);
 
-      return () => clearTimeout(timer); // Clear the timer if the component unmounts or successNotification changes
+      return () => clearTimeout(timer); 
     }
   }, [successNotification]);
 
