@@ -6,7 +6,6 @@ import {
 } from "../Validate/CheckValidation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import { FaCalendarAlt } from 'react-icons/fa';
 
 const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const { id, name, measures } = objective;
@@ -24,6 +23,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const [validateDate, setValidateDate] = useState();
   const [measuresNameError, setMeasuresNameError] = useState();
 
+  const [validationSuccess, setValidationSuccess] = useState();
   const [successNotification, setSuccessNotification] = useState(false);
 
   const handleStartDateChange = (date) => {
@@ -40,44 +40,53 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
 
   const handleUpdate = () => {
     const isNameValid = validateObjectiveData("name", name);
-    setObjectiveNameError(!isNameValid);
     const isStartDateValid = validateObjectiveData(
       "startDate",
       startDateSelected
     );
-    setStartDateError(!isStartDateValid);
     const isEndDateValid = validateObjectiveData("endDate", endDateSelected);
+    const isMeasuresValid = validateObjectiveData("measures", measures);
+
+    setObjectiveNameError(!isNameValid);
+    setStartDateError(!isStartDateValid);
     setEndDateError(!isEndDateValid);
-    if (startDateError === false && endDateError === false) {
+    setMeasuresNameError(!isMeasuresValid);
+
+    if (isNameValid && isStartDateValid && isEndDateValid && isMeasuresValid) {
       const isDateValid = checkEndDate(startDateSelected, endDateSelected);
       setValidateDate(!isDateValid);
-    }
-    const isMeasuresValid = validateObjectiveData("measures", measures);
-    setMeasuresNameError(!isMeasuresValid);
-    if (
-      objectiveNameError === false &&
-      startDateError === false &&
-      endDateError === false &&
-      validateDate === false &&
-      measuresNameError === false
-    ) {
-      console.log("validation passed");
-      const updatedObjective = {
-        id: objective.id,
-        name: name,
-        measures: measures,
-        startDate: startDateSelected,
-        endDate: endDateSelected,
-      };
 
-      const updatedObjectiveString = JSON.stringify(updatedObjective);
-      localStorage.setItem(`objective_${objective.id}`, updatedObjectiveString);
-      console.log(localStorage);
-      setSuccessNotification(true);
+      if (!isDateValid) {
+        return;
+      }
+
+      setValidationSuccess(true);
     }
   };
 
+  const updateStorage = () => {
+    console.log("validation passed");
+    const updatedObjective = {
+      id: objective.id,
+      name: name,
+      measures: measures,
+      startDate: startDateSelected,
+      endDate: endDateSelected,
+    };
+
+    const updatedObjectiveString = JSON.stringify(updatedObjective);
+    localStorage.setItem(`objective_${objective.id}`, updatedObjectiveString);
+    console.log(localStorage);
+    setSuccessNotification(true);
+  };
+
   useEffect(() => {
+    console.log("useEffect called");
+    if (validationSuccess) {
+      updateStorage();
+      setValidationSuccess(false);
+    }
+
     if (successNotification) {
       const timer = setTimeout(() => {
         setSuccessNotification(false);
@@ -85,7 +94,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
 
       return () => clearTimeout(timer);
     }
-  }, [successNotification]);
+  }, [successNotification, validationSuccess]);
 
   return (
     <div
