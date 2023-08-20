@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TrackMeasures from "../MeasureComp/TrackMeasures";
 import {
   validateObjectiveData,
@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const { id, name, measures } = objective;
+
   const [startDateSelected, setStartDateSelected] = useState(
     objective.startDate ? new Date(objective.startDate) : null
   );
@@ -37,7 +38,10 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const handleUpdate = () => {
     const isNameValid = validateObjectiveData("name", name);
     setObjectiveNameError(!isNameValid);
-    const isStartDateValid = validateObjectiveData("startDate",startDateSelected);
+    const isStartDateValid = validateObjectiveData(
+      "startDate",
+      startDateSelected
+    );
     setStartDateError(!isStartDateValid);
     const isEndDateValid = validateObjectiveData("endDate", endDateSelected);
     setEndDateError(!isEndDateValid);
@@ -47,12 +51,6 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
     }
     const isMeasuresValid = validateObjectiveData("measures", measures);
     setMeasuresNameError(!isMeasuresValid);
-
-    console.log(objectiveNameError)
-    console.log(startDateError)
-    console.log(endDateError)
-    console.log(validateDate)
-    console.log(measuresNameError)
     if (
       objectiveNameError === false &&
       startDateError === false &&

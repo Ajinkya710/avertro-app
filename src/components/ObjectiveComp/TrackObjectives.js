@@ -61,17 +61,6 @@ const TrackObjectives = () => {
     }
     if (storedObjectives.length > 0) {
       setObjectives(storedObjectives);
-    } else {
-      //Setting first blank objective by default
-      setObjectives([
-        {
-          id: 1,
-          name: "",
-          measures: [""],
-          startDate: "",
-          endDate: "",
-        },
-      ]);
     }
   }, []);
 
