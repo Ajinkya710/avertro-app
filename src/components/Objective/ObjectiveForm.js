@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TrackMeasures from "../MeasureComp/TrackMeasures";
+import TrackMeasures from "../Measure/TrackMeasures";
 import {
   validateObjectiveData,
   checkEndDate,

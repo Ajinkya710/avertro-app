@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import TrackObjectives from "./ObjectiveComp/TrackObjectives";
+import TrackObjectives from "../Objective/TrackObjectives";
 
 const Tabs = () => {
-  // Using default activeTab as 1 (Strategic Business Objectives)
-  // Mission & Vision tab had no content, hence didn't implement onClick
   const [activeTab, setActiveTab] = useState(1);
 
   const tabTitles = ["Mission & Vision", "Strategic Business Objectives"];
