@@ -40,10 +40,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
 
   const handleUpdate = () => {
     const isNameValid = validateObjectiveData("name", name);
-    const isStartDateValid = validateObjectiveData(
-      "startDate",
-      startDateSelected
-    );
+    const isStartDateValid = validateObjectiveData("startDate",startDateSelected);
     const isEndDateValid = validateObjectiveData("endDate", endDateSelected);
     const isMeasuresValid = validateObjectiveData("measures", measures);
 
