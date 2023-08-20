@@ -4,6 +4,7 @@ import ObjectiveForm from "./ObjectiveForm";
 
 const TrackObjectives = () => {
   const [objectives, setObjectives] = useState([]);
+  const [deleteObj, setDeleteObj] = useState(false);
 
   const handleAddObjective = () => {
     if (objectives.length < 3) {
@@ -20,18 +21,31 @@ const TrackObjectives = () => {
     }
   };
 
-  // Adjusting the ID's to be consecutive and then deleting last object
   const handleDeleteObjective = (id) => {
     const updatedObjectives = objectives.filter((obj) => obj.id !== id);
+    setObjectives(updatedObjectives);
 
-    updatedObjectives.forEach((obj, index) => {
-      const updatedId = index + 1;
-      const objString = JSON.stringify({ ...obj, id: updatedId });
-      localStorage.setItem(`objective_${updatedId}`, objString);
+    const storedObjectives = [];
+    for (let id = 1; ; id++) {
+      const storedObjectiveString = localStorage.getItem(`objective_${id}`);
+
+      if (!storedObjectiveString) {
+        break;
+      }
+      const storedObjective = JSON.parse(storedObjectiveString);
+      storedObjectives.push(storedObjective);
+    }
+    const updateStorageObjectives = storedObjectives.filter((obj) => obj.id !== id);
+    localStorage.removeItem(`objective_${id}`);
+    console.log(updateStorageObjectives)
+    updateStorageObjectives.forEach((obj, index) => {
+        const updatedId = index + 1;
+        const objString = JSON.stringify({ ...obj, id: updatedId });
+        console.log(objString)
+        localStorage.setItem(`objective_${updatedId}`, objString);
     });
     localStorage.removeItem(`objective_${objectives.length}`);
-
-    setObjectives(updatedObjectives);
+    setDeleteObj(!deleteObj)
   };
 
   const handleUpdateObjective = (id, field, value) => {
@@ -62,7 +76,7 @@ const TrackObjectives = () => {
     if (storedObjectives.length > 0) {
       setObjectives(storedObjectives);
     }
-  }, []);
+  }, [deleteObj]);
 
   return (
     <div className="p-5">

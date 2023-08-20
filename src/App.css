@@ -34,7 +34,6 @@ body {
     }
   }
   
-  /* Apply the animation to the root element */
   .successAlert {
     animation: fadeOut  0.5s ease-in-out;
   }
