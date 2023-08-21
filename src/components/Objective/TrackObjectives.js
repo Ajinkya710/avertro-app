@@ -22,7 +22,12 @@ const TrackObjectives = () => {
   };
 
   const handleDeleteObjective = (id) => {
-    const updatedObjectives = objectives.filter((obj) => obj.id !== id);
+    const updatedObjectives = objectives.filter((obj) => obj.id !== id)
+    updatedObjectives.forEach((obj, idx) => {
+      const updatedId = idx + 1;
+      obj = {...obj, id: updatedId}
+      setDeleteObj(!deleteObj)
+    })
     setObjectives(updatedObjectives);
 
     const storedObjectives = [];
@@ -43,7 +48,7 @@ const TrackObjectives = () => {
         localStorage.setItem(`objective_${updatedId}`, objString);
     });
     localStorage.removeItem(`objective_${objectives.length}`);
-    setDeleteObj(!deleteObj)
+
   };
 
   const handleUpdateObjective = (id, field, value) => {

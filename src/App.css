@@ -6,6 +6,9 @@
     --update-button-color: #25397D
   }
 
+  .no-date-icon::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 
 body {
     background: #F8F8F8;

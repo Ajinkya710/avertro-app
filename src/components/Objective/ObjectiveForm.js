@@ -23,7 +23,7 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
   const [validateDate, setValidateDate] = useState(false);
   const [measuresNameError, setMeasuresNameError] = useState(false);
 
-  const [validationSuccess, setValidationSuccess] = useState(false);
+  const [validationSuccess, setValidationSuccess] = useState();
   const [successNotification, setSuccessNotification] = useState(false);
 
   const handleStartDateChange = (date) => {
