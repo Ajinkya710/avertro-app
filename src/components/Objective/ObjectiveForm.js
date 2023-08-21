@@ -17,18 +17,18 @@ const ObjectiveForm = ({ objective, onDelete, onChange }) => {
     objective.endDate ? new Date(objective.endDate) : null
   );
 
-  const [objectiveNameError, setObjectiveNameError] = useState();
-  const [startDateError, setStartDateError] = useState();
-  const [endDateError, setEndDateError] = useState();
-  const [validateDate, setValidateDate] = useState();
-  const [measuresNameError, setMeasuresNameError] = useState();
+  const [objectiveNameError, setObjectiveNameError] = useState(false);
+  const [startDateError, setStartDateError] = useState(false);
+  const [endDateError, setEndDateError] = useState(false);
+  const [validateDate, setValidateDate] = useState(false);
+  const [measuresNameError, setMeasuresNameError] = useState(false);
 
-  const [validationSuccess, setValidationSuccess] = useState();
+  const [validationSuccess, setValidationSuccess] = useState(false);
   const [successNotification, setSuccessNotification] = useState(false);
 
   const handleStartDateChange = (date) => {
     setStartDateError(false);
-    setEndDateError();
+    // setEndDateError();
     setValidateDate(false);
     setStartDateSelected(date);
     setEndDateSelected("");
